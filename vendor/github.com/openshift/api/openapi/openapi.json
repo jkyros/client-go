@@ -4812,6 +4812,17 @@
         }
       }
     },
+    "com.github.openshift.api.config.v1.CloudControllerManagerSpec": {
+      "description": "CloudControllerManagerSpec holds Cloud Controller Manager (a.k.a. CCM or CPI) related settings",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "state determines whether or not an external Cloud Controller Manager is expected to be installed within the cluster. https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/#running-cloud-controller-manager\n\nWhen set to \"External\", new nodes will be tainted as uninitialized when created, preventing them from running workloads until they are initialized by the cloud controller manager. When omitted or set to \"None\", new nodes will be not tainted and no extra initialization from the cloud controller manager is expected.",
+          "type": "string",
+          "default": ""
+        }
+      }
+    },
     "com.github.openshift.api.config.v1.ClusterCondition": {
       "description": "ClusterCondition is a union of typed cluster conditions.  The 'type' property determines which of the type-specific properties are relevant. When evaluated on a cluster, the condition may match, not match, or fail to evaluate.",
       "type": "object",
@@ -5839,6 +5850,26 @@
           }
         }
       }
+    },
+    "com.github.openshift.api.config.v1.ExternalPlatformSpec": {
+      "description": "ExternalPlatformSpec holds the desired state for the generic External infrastructure provider.",
+      "type": "object",
+      "properties": {
+        "cloudControllerManager": {
+          "description": "CloudControllerManager contains settings specific to the external Cloud Controller Manager (a.k.a. CCM or CPI)",
+          "default": {},
+          "$ref": "#/definitions/com.github.openshift.api.config.v1.CloudControllerManagerSpec"
+        },
+        "platformName": {
+          "description": "PlatformName holds the arbitrary string representing the infrastructure provider name, expected to be set at the installation time. This field is solely for informational and reporting purposes and is not expected to be used for decision-making.",
+          "type": "string",
+          "default": "Unknown"
+        }
+      }
+    },
+    "com.github.openshift.api.config.v1.ExternalPlatformStatus": {
+      "description": "ExternalPlatformStatus holds the current status of the generic External infrastructure provider.",
+      "type": "object"
     },
     "com.github.openshift.api.config.v1.FeatureGate": {
       "description": "Feature holds cluster-wide information about feature gates.  The canonical name is `cluster`\n\nCompatibility level 1: Stable within a major release for a minimum of 12 months or 3 minor releases (whichever is longer).",
@@ -8230,6 +8261,10 @@
           "description": "EquinixMetal contains settings specific to the Equinix Metal infrastructure provider.",
           "$ref": "#/definitions/com.github.openshift.api.config.v1.EquinixMetalPlatformSpec"
         },
+        "external": {
+          "description": "ExternalPlatformType represents generic infrastructure provider. Platform-specific components should be supplemented separately.",
+          "$ref": "#/definitions/com.github.openshift.api.config.v1.ExternalPlatformSpec"
+        },
         "gcp": {
           "description": "GCP contains settings specific to the Google Cloud Platform infrastructure provider.",
           "$ref": "#/definitions/com.github.openshift.api.config.v1.GCPPlatformSpec"
@@ -8295,6 +8330,10 @@
         "equinixMetal": {
           "description": "EquinixMetal contains settings specific to the Equinix Metal infrastructure provider.",
           "$ref": "#/definitions/com.github.openshift.api.config.v1.EquinixMetalPlatformStatus"
+        },
+        "external": {
+          "description": "External contains settings specific to the generic External infrastructure provider.",
+          "$ref": "#/definitions/com.github.openshift.api.config.v1.ExternalPlatformStatus"
         },
         "gcp": {
           "description": "GCP contains settings specific to the Google Cloud Platform infrastructure provider.",
@@ -11324,6 +11363,14 @@
         },
         "layers": {
           "description": "layers is the list of blobs that compose this image, from base layer to top layer. All layers referenced by this array will be defined in the blobs map. Some images may have zero layers.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        "manifests": {
+          "description": "manifests is the list of other image names that this image points to. For a single architecture image, it is empty. For a multi-arch image, it consists of the digests of single architecture images, such images shouldn't have layers nor config.",
           "type": "array",
           "items": {
             "type": "string",
@@ -25620,6 +25667,7 @@
       }
     },
     "com.github.openshift.api.operator.v1.Perspective": {
+      "description": "Perspective defines a perspective that cluster admins want to show/hide in the perspective switcher dropdown",
       "type": "object",
       "required": [
         "id",
@@ -25630,6 +25678,14 @@
           "description": "id defines the id of the perspective. Example: \"dev\", \"admin\". The available perspective ids can be found in the code snippet section next to the yaml editor. Incorrect or unknown ids will be ignored.",
           "type": "string",
           "default": ""
+        },
+        "pinnedResources": {
+          "description": "pinnedResources defines the list of default pinned resources that users will see on the perspective navigation if they have not customized these pinned resources themselves. The list of available Kubernetes resources could be read via `kubectl api-resources`. The console will also provide a configuration UI and a YAML snippet that will list the available resources that can be pinned to the navigation. Incorrect or unknown resources will be ignored.",
+          "type": "array",
+          "items": {
+            "default": {},
+            "$ref": "#/definitions/com.github.openshift.api.operator.v1.PinnedResourceReference"
+          }
         },
         "visibility": {
           "description": "visibility defines the state of perspective along with access review checks if needed for that perspective.",
@@ -25663,6 +25719,32 @@
           }
         }
       ]
+    },
+    "com.github.openshift.api.operator.v1.PinnedResourceReference": {
+      "description": "PinnedResourceReference includes the group, version and type of resource",
+      "type": "object",
+      "required": [
+        "group",
+        "version",
+        "resource"
+      ],
+      "properties": {
+        "group": {
+          "description": "group is the API Group of the Resource. Enter empty string for the core group. This value should consist of only lowercase alphanumeric characters, hyphens and periods. Example: \"\", \"apps\", \"build.openshift.io\", etc.",
+          "type": "string",
+          "default": ""
+        },
+        "resource": {
+          "description": "resource is the type that is being referenced. It is normally the plural form of the resource kind in lowercase. This value should consist of only lowercase alphanumeric characters and hyphens. Example: \"deployments\", \"deploymentconfigs\", \"pods\", etc.",
+          "type": "string",
+          "default": ""
+        },
+        "version": {
+          "description": "version is the API Version of the Resource. This value should consist of only lowercase alphanumeric characters. Example: \"v1\", \"v1beta1\", etc.",
+          "type": "string",
+          "default": ""
+        }
+      }
     },
     "com.github.openshift.api.operator.v1.PolicyAuditConfig": {
       "type": "object",
