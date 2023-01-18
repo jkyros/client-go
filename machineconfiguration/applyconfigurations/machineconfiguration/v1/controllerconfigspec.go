@@ -28,6 +28,7 @@ type ControllerConfigSpecApplyConfiguration struct {
 	DNS                            *configv1.DNS                          `json:"dns,omitempty"`
 	IPFamilies                     *machineconfigurationv1.IPFamiliesType `json:"ipFamilies,omitempty"`
 	NetworkType                    *string                                `json:"networkType,omitempty"`
+	Network                        *NetworkInfoApplyConfiguration         `json:"network,omitempty"`
 	BaseOSContainerImage           *string                                `json:"baseOSContainerImage,omitempty"`
 	BaseOSExtensionsContainerImage *string                                `json:"baseOSExtensionsContainerImage,omitempty"`
 }
@@ -185,6 +186,14 @@ func (b *ControllerConfigSpecApplyConfiguration) WithIPFamilies(value machinecon
 // If called multiple times, the NetworkType field is set to the value of the last call.
 func (b *ControllerConfigSpecApplyConfiguration) WithNetworkType(value string) *ControllerConfigSpecApplyConfiguration {
 	b.NetworkType = &value
+	return b
+}
+
+// WithNetwork sets the Network field in the declarative configuration to the given value
+// and returns the receiver, so that objects can be built by chaining "With" function invocations.
+// If called multiple times, the Network field is set to the value of the last call.
+func (b *ControllerConfigSpecApplyConfiguration) WithNetwork(value *NetworkInfoApplyConfiguration) *ControllerConfigSpecApplyConfiguration {
+	b.Network = value
 	return b
 }
 

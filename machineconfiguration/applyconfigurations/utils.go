@@ -53,6 +53,8 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		return &machineconfigurationv1.MachineConfigPoolStatusConfigurationApplyConfiguration{}
 	case v1.SchemeGroupVersion.WithKind("MachineConfigSpec"):
 		return &machineconfigurationv1.MachineConfigSpecApplyConfiguration{}
+	case v1.SchemeGroupVersion.WithKind("NetworkInfo"):
+		return &machineconfigurationv1.NetworkInfoApplyConfiguration{}
 
 	}
 	return nil
