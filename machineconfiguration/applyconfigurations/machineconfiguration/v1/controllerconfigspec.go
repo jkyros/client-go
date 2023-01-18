@@ -11,23 +11,25 @@ import (
 // ControllerConfigSpecApplyConfiguration represents an declarative configuration of the ControllerConfigSpec type for use
 // with apply.
 type ControllerConfigSpecApplyConfiguration struct {
-	ClusterDNSIP               *string                                `json:"clusterDNSIP,omitempty"`
-	CloudProviderConfig        *string                                `json:"cloudProviderConfig,omitempty"`
-	Platform                   *string                                `json:"platform,omitempty"`
-	EtcdDiscoveryDomain        *string                                `json:"etcdDiscoveryDomain,omitempty"`
-	KubeAPIServerServingCAData []byte                                 `json:"kubeAPIServerServingCAData,omitempty"`
-	RootCAData                 []byte                                 `json:"rootCAData,omitempty"`
-	CloudProviderCAData        []byte                                 `json:"cloudProviderCAData,omitempty"`
-	AdditionalTrustBundle      []byte                                 `json:"additionalTrustBundle,omitempty"`
-	PullSecret                 *v1.ObjectReference                    `json:"pullSecret,omitempty"`
-	Images                     map[string]string                      `json:"images,omitempty"`
-	OSImageURL                 *string                                `json:"osImageURL,omitempty"`
-	ReleaseImage               *string                                `json:"releaseImage,omitempty"`
-	Proxy                      *configv1.ProxyStatus                  `json:"proxy,omitempty"`
-	Infra                      *configv1.Infrastructure               `json:"infra,omitempty"`
-	DNS                        *configv1.DNS                          `json:"dns,omitempty"`
-	IPFamilies                 *machineconfigurationv1.IPFamiliesType `json:"ipFamilies,omitempty"`
-	NetworkType                *string                                `json:"networkType,omitempty"`
+	ClusterDNSIP                   *string                                `json:"clusterDNSIP,omitempty"`
+	CloudProviderConfig            *string                                `json:"cloudProviderConfig,omitempty"`
+	Platform                       *string                                `json:"platform,omitempty"`
+	EtcdDiscoveryDomain            *string                                `json:"etcdDiscoveryDomain,omitempty"`
+	KubeAPIServerServingCAData     []byte                                 `json:"kubeAPIServerServingCAData,omitempty"`
+	RootCAData                     []byte                                 `json:"rootCAData,omitempty"`
+	CloudProviderCAData            []byte                                 `json:"cloudProviderCAData,omitempty"`
+	AdditionalTrustBundle          []byte                                 `json:"additionalTrustBundle,omitempty"`
+	PullSecret                     *v1.ObjectReference                    `json:"pullSecret,omitempty"`
+	Images                         map[string]string                      `json:"images,omitempty"`
+	OSImageURL                     *string                                `json:"osImageURL,omitempty"`
+	ReleaseImage                   *string                                `json:"releaseImage,omitempty"`
+	Proxy                          *configv1.ProxyStatus                  `json:"proxy,omitempty"`
+	Infra                          *configv1.Infrastructure               `json:"infra,omitempty"`
+	DNS                            *configv1.DNS                          `json:"dns,omitempty"`
+	IPFamilies                     *machineconfigurationv1.IPFamiliesType `json:"ipFamilies,omitempty"`
+	NetworkType                    *string                                `json:"networkType,omitempty"`
+	BaseOSContainerImage           *string                                `json:"baseOSContainerImage,omitempty"`
+	BaseOSExtensionsContainerImage *string                                `json:"baseOSExtensionsContainerImage,omitempty"`
 }
 
 // ControllerConfigSpecApplyConfiguration constructs an declarative configuration of the ControllerConfigSpec type for use with
@@ -183,5 +185,21 @@ func (b *ControllerConfigSpecApplyConfiguration) WithIPFamilies(value machinecon
 // If called multiple times, the NetworkType field is set to the value of the last call.
 func (b *ControllerConfigSpecApplyConfiguration) WithNetworkType(value string) *ControllerConfigSpecApplyConfiguration {
 	b.NetworkType = &value
+	return b
+}
+
+// WithBaseOSContainerImage sets the BaseOSContainerImage field in the declarative configuration to the given value
+// and returns the receiver, so that objects can be built by chaining "With" function invocations.
+// If called multiple times, the BaseOSContainerImage field is set to the value of the last call.
+func (b *ControllerConfigSpecApplyConfiguration) WithBaseOSContainerImage(value string) *ControllerConfigSpecApplyConfiguration {
+	b.BaseOSContainerImage = &value
+	return b
+}
+
+// WithBaseOSExtensionsContainerImage sets the BaseOSExtensionsContainerImage field in the declarative configuration to the given value
+// and returns the receiver, so that objects can be built by chaining "With" function invocations.
+// If called multiple times, the BaseOSExtensionsContainerImage field is set to the value of the last call.
+func (b *ControllerConfigSpecApplyConfiguration) WithBaseOSExtensionsContainerImage(value string) *ControllerConfigSpecApplyConfiguration {
+	b.BaseOSExtensionsContainerImage = &value
 	return b
 }

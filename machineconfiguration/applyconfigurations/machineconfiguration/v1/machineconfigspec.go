@@ -9,12 +9,13 @@ import (
 // MachineConfigSpecApplyConfiguration represents an declarative configuration of the MachineConfigSpec type for use
 // with apply.
 type MachineConfigSpecApplyConfiguration struct {
-	OSImageURL      *string               `json:"osImageURL,omitempty"`
-	Config          *runtime.RawExtension `json:"config,omitempty"`
-	KernelArguments []string              `json:"kernelArguments,omitempty"`
-	Extensions      []string              `json:"extensions,omitempty"`
-	FIPS            *bool                 `json:"fips,omitempty"`
-	KernelType      *string               `json:"kernelType,omitempty"`
+	OSImageURL                     *string               `json:"osImageURL,omitempty"`
+	Config                         *runtime.RawExtension `json:"config,omitempty"`
+	KernelArguments                []string              `json:"kernelArguments,omitempty"`
+	Extensions                     []string              `json:"extensions,omitempty"`
+	FIPS                           *bool                 `json:"fips,omitempty"`
+	KernelType                     *string               `json:"kernelType,omitempty"`
+	BaseOSExtensionsContainerImage *string               `json:"baseOSExtensionsContainerImage,omitempty"`
 }
 
 // MachineConfigSpecApplyConfiguration constructs an declarative configuration of the MachineConfigSpec type for use with
@@ -72,5 +73,13 @@ func (b *MachineConfigSpecApplyConfiguration) WithFIPS(value bool) *MachineConfi
 // If called multiple times, the KernelType field is set to the value of the last call.
 func (b *MachineConfigSpecApplyConfiguration) WithKernelType(value string) *MachineConfigSpecApplyConfiguration {
 	b.KernelType = &value
+	return b
+}
+
+// WithBaseOSExtensionsContainerImage sets the BaseOSExtensionsContainerImage field in the declarative configuration to the given value
+// and returns the receiver, so that objects can be built by chaining "With" function invocations.
+// If called multiple times, the BaseOSExtensionsContainerImage field is set to the value of the last call.
+func (b *MachineConfigSpecApplyConfiguration) WithBaseOSExtensionsContainerImage(value string) *MachineConfigSpecApplyConfiguration {
+	b.BaseOSExtensionsContainerImage = &value
 	return b
 }
