@@ -26,7 +26,7 @@ func ContainerRuntimeConfig(name string) *ContainerRuntimeConfigApplyConfigurati
 	b := &ContainerRuntimeConfigApplyConfiguration{}
 	b.WithName(name)
 	b.WithKind("ContainerRuntimeConfig")
-	b.WithAPIVersion("nmachineconfiguration.openshift.io/v1")
+	b.WithAPIVersion("machineconfiguration.openshift.io/v1")
 	return b
 }
 
@@ -61,7 +61,7 @@ func extractContainerRuntimeConfig(containerRuntimeConfig *apimachineconfigurati
 	b.WithName(containerRuntimeConfig.Name)
 
 	b.WithKind("ContainerRuntimeConfig")
-	b.WithAPIVersion("nmachineconfiguration.openshift.io/v1")
+	b.WithAPIVersion("machineconfiguration.openshift.io/v1")
 	return b, nil
 }
 

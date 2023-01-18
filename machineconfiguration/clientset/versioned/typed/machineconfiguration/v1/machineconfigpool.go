@@ -45,7 +45,7 @@ type machineConfigPools struct {
 }
 
 // newMachineConfigPools returns a MachineConfigPools
-func newMachineConfigPools(c *NmachineconfigurationV1Client) *machineConfigPools {
+func newMachineConfigPools(c *MachineconfigurationV1Client) *machineConfigPools {
 	return &machineConfigPools{
 		client: c.RESTClient(),
 	}

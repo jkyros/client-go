@@ -19,12 +19,12 @@ import (
 
 // FakeContainerRuntimeConfigs implements ContainerRuntimeConfigInterface
 type FakeContainerRuntimeConfigs struct {
-	Fake *FakeNmachineconfigurationV1
+	Fake *FakeMachineconfigurationV1
 }
 
-var containerruntimeconfigsResource = schema.GroupVersionResource{Group: "nmachineconfiguration.openshift.io", Version: "v1", Resource: "containerruntimeconfigs"}
+var containerruntimeconfigsResource = schema.GroupVersionResource{Group: "machineconfiguration.openshift.io", Version: "v1", Resource: "containerruntimeconfigs"}
 
-var containerruntimeconfigsKind = schema.GroupVersionKind{Group: "nmachineconfiguration.openshift.io", Version: "v1", Kind: "ContainerRuntimeConfig"}
+var containerruntimeconfigsKind = schema.GroupVersionKind{Group: "machineconfiguration.openshift.io", Version: "v1", Kind: "ContainerRuntimeConfig"}
 
 // Get takes name of the containerRuntimeConfig, and returns the corresponding containerRuntimeConfig object, and an error if there is any.
 func (c *FakeContainerRuntimeConfigs) Get(ctx context.Context, name string, options v1.GetOptions) (result *machineconfigurationv1.ContainerRuntimeConfig, err error) {

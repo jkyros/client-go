@@ -19,12 +19,12 @@ import (
 
 // FakeControllerConfigs implements ControllerConfigInterface
 type FakeControllerConfigs struct {
-	Fake *FakeNmachineconfigurationV1
+	Fake *FakeMachineconfigurationV1
 }
 
-var controllerconfigsResource = schema.GroupVersionResource{Group: "nmachineconfiguration.openshift.io", Version: "v1", Resource: "controllerconfigs"}
+var controllerconfigsResource = schema.GroupVersionResource{Group: "machineconfiguration.openshift.io", Version: "v1", Resource: "controllerconfigs"}
 
-var controllerconfigsKind = schema.GroupVersionKind{Group: "nmachineconfiguration.openshift.io", Version: "v1", Kind: "ControllerConfig"}
+var controllerconfigsKind = schema.GroupVersionKind{Group: "machineconfiguration.openshift.io", Version: "v1", Kind: "ControllerConfig"}
 
 // Get takes name of the controllerConfig, and returns the corresponding controllerConfig object, and an error if there is any.
 func (c *FakeControllerConfigs) Get(ctx context.Context, name string, options v1.GetOptions) (result *machineconfigurationv1.ControllerConfig, err error) {

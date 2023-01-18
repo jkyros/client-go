@@ -8,33 +8,33 @@ import (
 	testing "k8s.io/client-go/testing"
 )
 
-type FakeNmachineconfigurationV1 struct {
+type FakeMachineconfigurationV1 struct {
 	*testing.Fake
 }
 
-func (c *FakeNmachineconfigurationV1) ContainerRuntimeConfigs() v1.ContainerRuntimeConfigInterface {
+func (c *FakeMachineconfigurationV1) ContainerRuntimeConfigs() v1.ContainerRuntimeConfigInterface {
 	return &FakeContainerRuntimeConfigs{c}
 }
 
-func (c *FakeNmachineconfigurationV1) ControllerConfigs() v1.ControllerConfigInterface {
+func (c *FakeMachineconfigurationV1) ControllerConfigs() v1.ControllerConfigInterface {
 	return &FakeControllerConfigs{c}
 }
 
-func (c *FakeNmachineconfigurationV1) KubeletConfigs() v1.KubeletConfigInterface {
+func (c *FakeMachineconfigurationV1) KubeletConfigs() v1.KubeletConfigInterface {
 	return &FakeKubeletConfigs{c}
 }
 
-func (c *FakeNmachineconfigurationV1) MachineConfigs() v1.MachineConfigInterface {
+func (c *FakeMachineconfigurationV1) MachineConfigs() v1.MachineConfigInterface {
 	return &FakeMachineConfigs{c}
 }
 
-func (c *FakeNmachineconfigurationV1) MachineConfigPools() v1.MachineConfigPoolInterface {
+func (c *FakeMachineconfigurationV1) MachineConfigPools() v1.MachineConfigPoolInterface {
 	return &FakeMachineConfigPools{c}
 }
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *FakeNmachineconfigurationV1) RESTClient() rest.Interface {
+func (c *FakeMachineconfigurationV1) RESTClient() rest.Interface {
 	var ret *rest.RESTClient
 	return ret
 }

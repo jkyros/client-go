@@ -156,9 +156,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Nmachineconfiguration() machineconfiguration.Interface
+	Machineconfiguration() machineconfiguration.Interface
 }
 
-func (f *sharedInformerFactory) Nmachineconfiguration() machineconfiguration.Interface {
+func (f *sharedInformerFactory) Machineconfiguration() machineconfiguration.Interface {
 	return machineconfiguration.New(f, f.namespace, f.tweakListOptions)
 }

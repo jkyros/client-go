@@ -19,12 +19,12 @@ import (
 
 // FakeMachineConfigPools implements MachineConfigPoolInterface
 type FakeMachineConfigPools struct {
-	Fake *FakeNmachineconfigurationV1
+	Fake *FakeMachineconfigurationV1
 }
 
-var machineconfigpoolsResource = schema.GroupVersionResource{Group: "nmachineconfiguration.openshift.io", Version: "v1", Resource: "machineconfigpools"}
+var machineconfigpoolsResource = schema.GroupVersionResource{Group: "machineconfiguration.openshift.io", Version: "v1", Resource: "machineconfigpools"}
 
-var machineconfigpoolsKind = schema.GroupVersionKind{Group: "nmachineconfiguration.openshift.io", Version: "v1", Kind: "MachineConfigPool"}
+var machineconfigpoolsKind = schema.GroupVersionKind{Group: "machineconfiguration.openshift.io", Version: "v1", Kind: "MachineConfigPool"}
 
 // Get takes name of the machineConfigPool, and returns the corresponding machineConfigPool object, and an error if there is any.
 func (c *FakeMachineConfigPools) Get(ctx context.Context, name string, options v1.GetOptions) (result *machineconfigurationv1.MachineConfigPool, err error) {

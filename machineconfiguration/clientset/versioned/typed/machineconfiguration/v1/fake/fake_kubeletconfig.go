@@ -19,12 +19,12 @@ import (
 
 // FakeKubeletConfigs implements KubeletConfigInterface
 type FakeKubeletConfigs struct {
-	Fake *FakeNmachineconfigurationV1
+	Fake *FakeMachineconfigurationV1
 }
 
-var kubeletconfigsResource = schema.GroupVersionResource{Group: "nmachineconfiguration.openshift.io", Version: "v1", Resource: "kubeletconfigs"}
+var kubeletconfigsResource = schema.GroupVersionResource{Group: "machineconfiguration.openshift.io", Version: "v1", Resource: "kubeletconfigs"}
 
-var kubeletconfigsKind = schema.GroupVersionKind{Group: "nmachineconfiguration.openshift.io", Version: "v1", Kind: "KubeletConfig"}
+var kubeletconfigsKind = schema.GroupVersionKind{Group: "machineconfiguration.openshift.io", Version: "v1", Kind: "KubeletConfig"}
 
 // Get takes name of the kubeletConfig, and returns the corresponding kubeletConfig object, and an error if there is any.
 func (c *FakeKubeletConfigs) Get(ctx context.Context, name string, options v1.GetOptions) (result *machineconfigurationv1.KubeletConfig, err error) {

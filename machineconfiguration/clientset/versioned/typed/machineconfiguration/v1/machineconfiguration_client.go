@@ -10,7 +10,7 @@ import (
 	rest "k8s.io/client-go/rest"
 )
 
-type NmachineconfigurationV1Interface interface {
+type MachineconfigurationV1Interface interface {
 	RESTClient() rest.Interface
 	ContainerRuntimeConfigsGetter
 	ControllerConfigsGetter
@@ -19,35 +19,35 @@ type NmachineconfigurationV1Interface interface {
 	MachineConfigPoolsGetter
 }
 
-// NmachineconfigurationV1Client is used to interact with features provided by the nmachineconfiguration.openshift.io group.
-type NmachineconfigurationV1Client struct {
+// MachineconfigurationV1Client is used to interact with features provided by the machineconfiguration.openshift.io group.
+type MachineconfigurationV1Client struct {
 	restClient rest.Interface
 }
 
-func (c *NmachineconfigurationV1Client) ContainerRuntimeConfigs() ContainerRuntimeConfigInterface {
+func (c *MachineconfigurationV1Client) ContainerRuntimeConfigs() ContainerRuntimeConfigInterface {
 	return newContainerRuntimeConfigs(c)
 }
 
-func (c *NmachineconfigurationV1Client) ControllerConfigs() ControllerConfigInterface {
+func (c *MachineconfigurationV1Client) ControllerConfigs() ControllerConfigInterface {
 	return newControllerConfigs(c)
 }
 
-func (c *NmachineconfigurationV1Client) KubeletConfigs() KubeletConfigInterface {
+func (c *MachineconfigurationV1Client) KubeletConfigs() KubeletConfigInterface {
 	return newKubeletConfigs(c)
 }
 
-func (c *NmachineconfigurationV1Client) MachineConfigs() MachineConfigInterface {
+func (c *MachineconfigurationV1Client) MachineConfigs() MachineConfigInterface {
 	return newMachineConfigs(c)
 }
 
-func (c *NmachineconfigurationV1Client) MachineConfigPools() MachineConfigPoolInterface {
+func (c *MachineconfigurationV1Client) MachineConfigPools() MachineConfigPoolInterface {
 	return newMachineConfigPools(c)
 }
 
-// NewForConfig creates a new NmachineconfigurationV1Client for the given config.
+// NewForConfig creates a new MachineconfigurationV1Client for the given config.
 // NewForConfig is equivalent to NewForConfigAndClient(c, httpClient),
 // where httpClient was generated with rest.HTTPClientFor(c).
-func NewForConfig(c *rest.Config) (*NmachineconfigurationV1Client, error) {
+func NewForConfig(c *rest.Config) (*MachineconfigurationV1Client, error) {
 	config := *c
 	if err := setConfigDefaults(&config); err != nil {
 		return nil, err
@@ -59,9 +59,9 @@ func NewForConfig(c *rest.Config) (*NmachineconfigurationV1Client, error) {
 	return NewForConfigAndClient(&config, httpClient)
 }
 
-// NewForConfigAndClient creates a new NmachineconfigurationV1Client for the given config and http client.
+// NewForConfigAndClient creates a new MachineconfigurationV1Client for the given config and http client.
 // Note the http client provided takes precedence over the configured transport values.
-func NewForConfigAndClient(c *rest.Config, h *http.Client) (*NmachineconfigurationV1Client, error) {
+func NewForConfigAndClient(c *rest.Config, h *http.Client) (*MachineconfigurationV1Client, error) {
 	config := *c
 	if err := setConfigDefaults(&config); err != nil {
 		return nil, err
@@ -70,12 +70,12 @@ func NewForConfigAndClient(c *rest.Config, h *http.Client) (*Nmachineconfigurati
 	if err != nil {
 		return nil, err
 	}
-	return &NmachineconfigurationV1Client{client}, nil
+	return &MachineconfigurationV1Client{client}, nil
 }
 
-// NewForConfigOrDie creates a new NmachineconfigurationV1Client for the given config and
+// NewForConfigOrDie creates a new MachineconfigurationV1Client for the given config and
 // panics if there is an error in the config.
-func NewForConfigOrDie(c *rest.Config) *NmachineconfigurationV1Client {
+func NewForConfigOrDie(c *rest.Config) *MachineconfigurationV1Client {
 	client, err := NewForConfig(c)
 	if err != nil {
 		panic(err)
@@ -83,9 +83,9 @@ func NewForConfigOrDie(c *rest.Config) *NmachineconfigurationV1Client {
 	return client
 }
 
-// New creates a new NmachineconfigurationV1Client for the given RESTClient.
-func New(c rest.Interface) *NmachineconfigurationV1Client {
-	return &NmachineconfigurationV1Client{c}
+// New creates a new MachineconfigurationV1Client for the given RESTClient.
+func New(c rest.Interface) *MachineconfigurationV1Client {
+	return &MachineconfigurationV1Client{c}
 }
 
 func setConfigDefaults(config *rest.Config) error {
@@ -103,7 +103,7 @@ func setConfigDefaults(config *rest.Config) error {
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *NmachineconfigurationV1Client) RESTClient() rest.Interface {
+func (c *MachineconfigurationV1Client) RESTClient() rest.Interface {
 	if c == nil {
 		return nil
 	}

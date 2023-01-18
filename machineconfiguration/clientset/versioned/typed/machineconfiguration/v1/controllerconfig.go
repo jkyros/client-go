@@ -45,7 +45,7 @@ type controllerConfigs struct {
 }
 
 // newControllerConfigs returns a ControllerConfigs
-func newControllerConfigs(c *NmachineconfigurationV1Client) *controllerConfigs {
+func newControllerConfigs(c *MachineconfigurationV1Client) *controllerConfigs {
 	return &controllerConfigs{
 		client: c.RESTClient(),
 	}

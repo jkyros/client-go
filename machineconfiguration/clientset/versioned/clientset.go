@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	nmachineconfigurationv1 "github.com/openshift/client-go/machineconfiguration/clientset/versioned/typed/machineconfiguration/v1"
+	machineconfigurationv1 "github.com/openshift/client-go/machineconfiguration/clientset/versioned/typed/machineconfiguration/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -14,19 +14,19 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
-	NmachineconfigurationV1() nmachineconfigurationv1.NmachineconfigurationV1Interface
+	MachineconfigurationV1() machineconfigurationv1.MachineconfigurationV1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	nmachineconfigurationV1 *nmachineconfigurationv1.NmachineconfigurationV1Client
+	machineconfigurationV1 *machineconfigurationv1.MachineconfigurationV1Client
 }
 
-// NmachineconfigurationV1 retrieves the NmachineconfigurationV1Client
-func (c *Clientset) NmachineconfigurationV1() nmachineconfigurationv1.NmachineconfigurationV1Interface {
-	return c.nmachineconfigurationV1
+// MachineconfigurationV1 retrieves the MachineconfigurationV1Client
+func (c *Clientset) MachineconfigurationV1() machineconfigurationv1.MachineconfigurationV1Interface {
+	return c.machineconfigurationV1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -73,7 +73,7 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 
 	var cs Clientset
 	var err error
-	cs.nmachineconfigurationV1, err = nmachineconfigurationv1.NewForConfigAndClient(&configShallowCopy, httpClient)
+	cs.machineconfigurationV1, err = machineconfigurationv1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -98,7 +98,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
-	cs.nmachineconfigurationV1 = nmachineconfigurationv1.New(c)
+	cs.machineconfigurationV1 = machineconfigurationv1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

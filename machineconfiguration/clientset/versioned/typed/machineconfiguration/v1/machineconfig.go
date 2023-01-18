@@ -43,7 +43,7 @@ type machineConfigs struct {
 }
 
 // newMachineConfigs returns a MachineConfigs
-func newMachineConfigs(c *NmachineconfigurationV1Client) *machineConfigs {
+func newMachineConfigs(c *MachineconfigurationV1Client) *machineConfigs {
 	return &machineConfigs{
 		client: c.RESTClient(),
 	}

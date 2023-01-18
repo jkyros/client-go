@@ -45,13 +45,13 @@ func NewFilteredKubeletConfigInformer(client versioned.Interface, resyncPeriod t
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.NmachineconfigurationV1().KubeletConfigs().List(context.TODO(), options)
+				return client.MachineconfigurationV1().KubeletConfigs().List(context.TODO(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.NmachineconfigurationV1().KubeletConfigs().Watch(context.TODO(), options)
+				return client.MachineconfigurationV1().KubeletConfigs().Watch(context.TODO(), options)
 			},
 		},
 		&machineconfigurationv1.KubeletConfig{},

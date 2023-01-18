@@ -36,17 +36,17 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=nmachineconfiguration.openshift.io, Version=v1
+	// Group=machineconfiguration.openshift.io, Version=v1
 	case v1.SchemeGroupVersion.WithResource("containerruntimeconfigs"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Nmachineconfiguration().V1().ContainerRuntimeConfigs().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Machineconfiguration().V1().ContainerRuntimeConfigs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("controllerconfigs"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Nmachineconfiguration().V1().ControllerConfigs().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Machineconfiguration().V1().ControllerConfigs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("kubeletconfigs"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Nmachineconfiguration().V1().KubeletConfigs().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Machineconfiguration().V1().KubeletConfigs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("machineconfigs"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Nmachineconfiguration().V1().MachineConfigs().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Machineconfiguration().V1().MachineConfigs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("machineconfigpools"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Nmachineconfiguration().V1().MachineConfigPools().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Machineconfiguration().V1().MachineConfigPools().Informer()}, nil
 
 	}
 

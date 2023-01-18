@@ -45,7 +45,7 @@ type kubeletConfigs struct {
 }
 
 // newKubeletConfigs returns a KubeletConfigs
-func newKubeletConfigs(c *NmachineconfigurationV1Client) *kubeletConfigs {
+func newKubeletConfigs(c *MachineconfigurationV1Client) *kubeletConfigs {
 	return &kubeletConfigs{
 		client: c.RESTClient(),
 	}

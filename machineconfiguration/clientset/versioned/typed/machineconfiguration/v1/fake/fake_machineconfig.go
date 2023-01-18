@@ -19,12 +19,12 @@ import (
 
 // FakeMachineConfigs implements MachineConfigInterface
 type FakeMachineConfigs struct {
-	Fake *FakeNmachineconfigurationV1
+	Fake *FakeMachineconfigurationV1
 }
 
-var machineconfigsResource = schema.GroupVersionResource{Group: "nmachineconfiguration.openshift.io", Version: "v1", Resource: "machineconfigs"}
+var machineconfigsResource = schema.GroupVersionResource{Group: "machineconfiguration.openshift.io", Version: "v1", Resource: "machineconfigs"}
 
-var machineconfigsKind = schema.GroupVersionKind{Group: "nmachineconfiguration.openshift.io", Version: "v1", Kind: "MachineConfig"}
+var machineconfigsKind = schema.GroupVersionKind{Group: "machineconfiguration.openshift.io", Version: "v1", Kind: "MachineConfig"}
 
 // Get takes name of the machineConfig, and returns the corresponding machineConfig object, and an error if there is any.
 func (c *FakeMachineConfigs) Get(ctx context.Context, name string, options v1.GetOptions) (result *machineconfigurationv1.MachineConfig, err error) {

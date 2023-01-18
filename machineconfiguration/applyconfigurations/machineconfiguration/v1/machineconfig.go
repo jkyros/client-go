@@ -25,7 +25,7 @@ func MachineConfig(name string) *MachineConfigApplyConfiguration {
 	b := &MachineConfigApplyConfiguration{}
 	b.WithName(name)
 	b.WithKind("MachineConfig")
-	b.WithAPIVersion("nmachineconfiguration.openshift.io/v1")
+	b.WithAPIVersion("machineconfiguration.openshift.io/v1")
 	return b
 }
 
@@ -52,7 +52,7 @@ func extractMachineConfig(machineConfig *apimachineconfigurationv1.MachineConfig
 	b.WithName(machineConfig.Name)
 
 	b.WithKind("MachineConfig")
-	b.WithAPIVersion("nmachineconfiguration.openshift.io/v1")
+	b.WithAPIVersion("machineconfiguration.openshift.io/v1")
 	return b, nil
 }
 

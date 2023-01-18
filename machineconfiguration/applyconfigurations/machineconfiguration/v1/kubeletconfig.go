@@ -26,7 +26,7 @@ func KubeletConfig(name string) *KubeletConfigApplyConfiguration {
 	b := &KubeletConfigApplyConfiguration{}
 	b.WithName(name)
 	b.WithKind("KubeletConfig")
-	b.WithAPIVersion("nmachineconfiguration.openshift.io/v1")
+	b.WithAPIVersion("machineconfiguration.openshift.io/v1")
 	return b
 }
 
@@ -61,7 +61,7 @@ func extractKubeletConfig(kubeletConfig *apimachineconfigurationv1.KubeletConfig
 	b.WithName(kubeletConfig.Name)
 
 	b.WithKind("KubeletConfig")
-	b.WithAPIVersion("nmachineconfiguration.openshift.io/v1")
+	b.WithAPIVersion("machineconfiguration.openshift.io/v1")
 	return b, nil
 }
 

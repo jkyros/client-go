@@ -26,7 +26,7 @@ func ControllerConfig(name string) *ControllerConfigApplyConfiguration {
 	b := &ControllerConfigApplyConfiguration{}
 	b.WithName(name)
 	b.WithKind("ControllerConfig")
-	b.WithAPIVersion("nmachineconfiguration.openshift.io/v1")
+	b.WithAPIVersion("machineconfiguration.openshift.io/v1")
 	return b
 }
 
@@ -61,7 +61,7 @@ func extractControllerConfig(controllerConfig *apimachineconfigurationv1.Control
 	b.WithName(controllerConfig.Name)
 
 	b.WithKind("ControllerConfig")
-	b.WithAPIVersion("nmachineconfiguration.openshift.io/v1")
+	b.WithAPIVersion("machineconfiguration.openshift.io/v1")
 	return b, nil
 }
 

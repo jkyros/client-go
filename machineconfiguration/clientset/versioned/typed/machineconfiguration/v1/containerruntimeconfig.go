@@ -45,7 +45,7 @@ type containerRuntimeConfigs struct {
 }
 
 // newContainerRuntimeConfigs returns a ContainerRuntimeConfigs
-func newContainerRuntimeConfigs(c *NmachineconfigurationV1Client) *containerRuntimeConfigs {
+func newContainerRuntimeConfigs(c *MachineconfigurationV1Client) *containerRuntimeConfigs {
 	return &containerRuntimeConfigs{
 		client: c.RESTClient(),
 	}

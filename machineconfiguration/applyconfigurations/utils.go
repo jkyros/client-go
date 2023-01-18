@@ -12,7 +12,7 @@ import (
 // apply configuration type exists for the given GroupVersionKind.
 func ForKind(kind schema.GroupVersionKind) interface{} {
 	switch kind {
-	// Group=nmachineconfiguration.openshift.io, Version=v1
+	// Group=machineconfiguration.openshift.io, Version=v1
 	case v1.SchemeGroupVersion.WithKind("ContainerRuntimeConfig"):
 		return &machineconfigurationv1.ContainerRuntimeConfigApplyConfiguration{}
 	case v1.SchemeGroupVersion.WithKind("ContainerRuntimeConfigCondition"):
