@@ -24,7 +24,7 @@ func MachineConfigPoolStatusConfiguration() *MachineConfigPoolStatusConfiguratio
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the Kind field is set to the value of the last call.
 func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithKind(value string) *MachineConfigPoolStatusConfigurationApplyConfiguration {
-	b.Kind = &value
+	b.Kind = value
 	return b
 }
 
@@ -32,7 +32,7 @@ func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithKind(value 
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the Namespace field is set to the value of the last call.
 func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithNamespace(value string) *MachineConfigPoolStatusConfigurationApplyConfiguration {
-	b.Namespace = &value
+	b.Namespace = value
 	return b
 }
 
@@ -40,7 +40,7 @@ func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithNamespace(v
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the Name field is set to the value of the last call.
 func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithName(value string) *MachineConfigPoolStatusConfigurationApplyConfiguration {
-	b.Name = &value
+	b.Name = value
 	return b
 }
 
@@ -48,7 +48,7 @@ func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithName(value 
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the UID field is set to the value of the last call.
 func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithUID(value types.UID) *MachineConfigPoolStatusConfigurationApplyConfiguration {
-	b.UID = &value
+	b.UID = value
 	return b
 }
 
@@ -56,7 +56,7 @@ func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithUID(value t
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the APIVersion field is set to the value of the last call.
 func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithAPIVersion(value string) *MachineConfigPoolStatusConfigurationApplyConfiguration {
-	b.APIVersion = &value
+	b.APIVersion = value
 	return b
 }
 
@@ -64,7 +64,7 @@ func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithAPIVersion(
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the ResourceVersion field is set to the value of the last call.
 func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithResourceVersion(value string) *MachineConfigPoolStatusConfigurationApplyConfiguration {
-	b.ResourceVersion = &value
+	b.ResourceVersion = value
 	return b
 }
 
@@ -72,7 +72,7 @@ func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithResourceVer
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the FieldPath field is set to the value of the last call.
 func (b *MachineConfigPoolStatusConfigurationApplyConfiguration) WithFieldPath(value string) *MachineConfigPoolStatusConfigurationApplyConfiguration {
-	b.FieldPath = &value
+	b.FieldPath = value
 	return b
 }
 
