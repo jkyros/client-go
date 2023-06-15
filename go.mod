@@ -57,6 +57,7 @@ require (
 )
 
 replace (
+	github.com/openshift/api => github.com/jkyros/api v0.0.0-20230615172733-84bb60936979
 	k8s.io/code-generator => github.com/openshift/kubernetes-code-generator v0.0.0-20220822200235-042483082c5e
 	k8s.io/kube-openapi => github.com/openshift/kube-openapi v0.0.0-20230324164143-98c122c21a89
 )
