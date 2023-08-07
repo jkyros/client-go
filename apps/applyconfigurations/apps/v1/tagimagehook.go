@@ -3,14 +3,14 @@
 package v1
 
 import (
-	v1 "k8s.io/api/core/v1"
+	v1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // TagImageHookApplyConfiguration represents an declarative configuration of the TagImageHook type for use
 // with apply.
 type TagImageHookApplyConfiguration struct {
-	ContainerName *string             `json:"containerName,omitempty"`
-	To            *v1.ObjectReference `json:"to,omitempty"`
+	ContainerName *string                               `json:"containerName,omitempty"`
+	To            *v1.ObjectReferenceApplyConfiguration `json:"to,omitempty"`
 }
 
 // TagImageHookApplyConfiguration constructs an declarative configuration of the TagImageHook type for use with
@@ -30,7 +30,7 @@ func (b *TagImageHookApplyConfiguration) WithContainerName(value string) *TagIma
 // WithTo sets the To field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the To field is set to the value of the last call.
-func (b *TagImageHookApplyConfiguration) WithTo(value v1.ObjectReference) *TagImageHookApplyConfiguration {
-	b.To = &value
+func (b *TagImageHookApplyConfiguration) WithTo(value *v1.ObjectReferenceApplyConfiguration) *TagImageHookApplyConfiguration {
+	b.To = value
 	return b
 }

@@ -4,23 +4,24 @@ package v1beta1
 
 import (
 	v1beta1 "github.com/openshift/api/machine/v1beta1"
-	v1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
+	v1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // MachineStatusApplyConfiguration represents an declarative configuration of the MachineStatus type for use
 // with apply.
 type MachineStatusApplyConfiguration struct {
-	NodeRef        *v1.ObjectReference              `json:"nodeRef,omitempty"`
-	LastUpdated    *metav1.Time                     `json:"lastUpdated,omitempty"`
-	ErrorReason    *v1beta1.MachineStatusError      `json:"errorReason,omitempty"`
-	ErrorMessage   *string                          `json:"errorMessage,omitempty"`
-	ProviderStatus *runtime.RawExtension            `json:"providerStatus,omitempty"`
-	Addresses      []v1.NodeAddress                 `json:"addresses,omitempty"`
-	LastOperation  *LastOperationApplyConfiguration `json:"lastOperation,omitempty"`
-	Phase          *string                          `json:"phase,omitempty"`
-	Conditions     *v1beta1.Conditions              `json:"conditions,omitempty"`
+	NodeRef        *v1.ObjectReferenceApplyConfiguration `json:"nodeRef,omitempty"`
+	LastUpdated    *metav1.Time                          `json:"lastUpdated,omitempty"`
+	ErrorReason    *v1beta1.MachineStatusError           `json:"errorReason,omitempty"`
+	ErrorMessage   *string                               `json:"errorMessage,omitempty"`
+	ProviderStatus *runtime.RawExtension                 `json:"providerStatus,omitempty"`
+	Addresses      []corev1.NodeAddress                  `json:"addresses,omitempty"`
+	LastOperation  *LastOperationApplyConfiguration      `json:"lastOperation,omitempty"`
+	Phase          *string                               `json:"phase,omitempty"`
+	Conditions     *v1beta1.Conditions                   `json:"conditions,omitempty"`
 }
 
 // MachineStatusApplyConfiguration constructs an declarative configuration of the MachineStatus type for use with
@@ -32,8 +33,8 @@ func MachineStatus() *MachineStatusApplyConfiguration {
 // WithNodeRef sets the NodeRef field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the NodeRef field is set to the value of the last call.
-func (b *MachineStatusApplyConfiguration) WithNodeRef(value v1.ObjectReference) *MachineStatusApplyConfiguration {
-	b.NodeRef = &value
+func (b *MachineStatusApplyConfiguration) WithNodeRef(value *v1.ObjectReferenceApplyConfiguration) *MachineStatusApplyConfiguration {
+	b.NodeRef = value
 	return b
 }
 
@@ -72,7 +73,7 @@ func (b *MachineStatusApplyConfiguration) WithProviderStatus(value runtime.RawEx
 // WithAddresses adds the given value to the Addresses field in the declarative configuration
 // and returns the receiver, so that objects can be build by chaining "With" function invocations.
 // If called multiple times, values provided by each call will be appended to the Addresses field.
-func (b *MachineStatusApplyConfiguration) WithAddresses(values ...v1.NodeAddress) *MachineStatusApplyConfiguration {
+func (b *MachineStatusApplyConfiguration) WithAddresses(values ...corev1.NodeAddress) *MachineStatusApplyConfiguration {
 	for i := range values {
 		b.Addresses = append(b.Addresses, values[i])
 	}

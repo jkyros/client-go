@@ -5,10 +5,10 @@ package v1
 import (
 	authorizationv1 "github.com/openshift/api/authorization/v1"
 	internal "github.com/openshift/client-go/authorization/applyconfigurations/internal"
-	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	managedfields "k8s.io/apimachinery/pkg/util/managedfields"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 	v1 "k8s.io/client-go/applyconfigurations/meta/v1"
 )
 
@@ -17,10 +17,10 @@ import (
 type RoleBindingApplyConfiguration struct {
 	v1.TypeMetaApplyConfiguration    `json:",inline"`
 	*v1.ObjectMetaApplyConfiguration `json:"metadata,omitempty"`
-	UserNames                        *authorizationv1.OptionalNames `json:"userNames,omitempty"`
-	GroupNames                       *authorizationv1.OptionalNames `json:"groupNames,omitempty"`
-	Subjects                         []corev1.ObjectReference       `json:"subjects,omitempty"`
-	RoleRef                          *corev1.ObjectReference        `json:"roleRef,omitempty"`
+	UserNames                        *authorizationv1.OptionalNames             `json:"userNames,omitempty"`
+	GroupNames                       *authorizationv1.OptionalNames             `json:"groupNames,omitempty"`
+	Subjects                         []corev1.ObjectReferenceApplyConfiguration `json:"subjects,omitempty"`
+	RoleRef                          *corev1.ObjectReferenceApplyConfiguration  `json:"roleRef,omitempty"`
 }
 
 // RoleBinding constructs an declarative configuration of the RoleBinding type for use with
@@ -247,9 +247,12 @@ func (b *RoleBindingApplyConfiguration) WithGroupNames(value authorizationv1.Opt
 // WithSubjects adds the given value to the Subjects field in the declarative configuration
 // and returns the receiver, so that objects can be build by chaining "With" function invocations.
 // If called multiple times, values provided by each call will be appended to the Subjects field.
-func (b *RoleBindingApplyConfiguration) WithSubjects(values ...corev1.ObjectReference) *RoleBindingApplyConfiguration {
+func (b *RoleBindingApplyConfiguration) WithSubjects(values ...*corev1.ObjectReferenceApplyConfiguration) *RoleBindingApplyConfiguration {
 	for i := range values {
-		b.Subjects = append(b.Subjects, values[i])
+		if values[i] == nil {
+			panic("nil value passed to WithSubjects")
+		}
+		b.Subjects = append(b.Subjects, *values[i])
 	}
 	return b
 }
@@ -257,7 +260,7 @@ func (b *RoleBindingApplyConfiguration) WithSubjects(values ...corev1.ObjectRefe
 // WithRoleRef sets the RoleRef field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the RoleRef field is set to the value of the last call.
-func (b *RoleBindingApplyConfiguration) WithRoleRef(value corev1.ObjectReference) *RoleBindingApplyConfiguration {
-	b.RoleRef = &value
+func (b *RoleBindingApplyConfiguration) WithRoleRef(value *corev1.ObjectReferenceApplyConfiguration) *RoleBindingApplyConfiguration {
+	b.RoleRef = value
 	return b
 }

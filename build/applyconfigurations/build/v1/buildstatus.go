@@ -6,26 +6,26 @@ import (
 	time "time"
 
 	v1 "github.com/openshift/api/build/v1"
-	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // BuildStatusApplyConfiguration represents an declarative configuration of the BuildStatus type for use
 // with apply.
 type BuildStatusApplyConfiguration struct {
-	Phase                      *v1.BuildPhase                       `json:"phase,omitempty"`
-	Cancelled                  *bool                                `json:"cancelled,omitempty"`
-	Reason                     *v1.StatusReason                     `json:"reason,omitempty"`
-	Message                    *string                              `json:"message,omitempty"`
-	StartTimestamp             *metav1.Time                         `json:"startTimestamp,omitempty"`
-	CompletionTimestamp        *metav1.Time                         `json:"completionTimestamp,omitempty"`
-	Duration                   *time.Duration                       `json:"duration,omitempty"`
-	OutputDockerImageReference *string                              `json:"outputDockerImageReference,omitempty"`
-	Config                     *corev1.ObjectReference              `json:"config,omitempty"`
-	Output                     *BuildStatusOutputApplyConfiguration `json:"output,omitempty"`
-	Stages                     []StageInfoApplyConfiguration        `json:"stages,omitempty"`
-	LogSnippet                 *string                              `json:"logSnippet,omitempty"`
-	Conditions                 []BuildConditionApplyConfiguration   `json:"conditions,omitempty"`
+	Phase                      *v1.BuildPhase                            `json:"phase,omitempty"`
+	Cancelled                  *bool                                     `json:"cancelled,omitempty"`
+	Reason                     *v1.StatusReason                          `json:"reason,omitempty"`
+	Message                    *string                                   `json:"message,omitempty"`
+	StartTimestamp             *metav1.Time                              `json:"startTimestamp,omitempty"`
+	CompletionTimestamp        *metav1.Time                              `json:"completionTimestamp,omitempty"`
+	Duration                   *time.Duration                            `json:"duration,omitempty"`
+	OutputDockerImageReference *string                                   `json:"outputDockerImageReference,omitempty"`
+	Config                     *corev1.ObjectReferenceApplyConfiguration `json:"config,omitempty"`
+	Output                     *BuildStatusOutputApplyConfiguration      `json:"output,omitempty"`
+	Stages                     []StageInfoApplyConfiguration             `json:"stages,omitempty"`
+	LogSnippet                 *string                                   `json:"logSnippet,omitempty"`
+	Conditions                 []BuildConditionApplyConfiguration        `json:"conditions,omitempty"`
 }
 
 // BuildStatusApplyConfiguration constructs an declarative configuration of the BuildStatus type for use with
@@ -101,8 +101,8 @@ func (b *BuildStatusApplyConfiguration) WithOutputDockerImageReference(value str
 // WithConfig sets the Config field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the Config field is set to the value of the last call.
-func (b *BuildStatusApplyConfiguration) WithConfig(value corev1.ObjectReference) *BuildStatusApplyConfiguration {
-	b.Config = &value
+func (b *BuildStatusApplyConfiguration) WithConfig(value *corev1.ObjectReferenceApplyConfiguration) *BuildStatusApplyConfiguration {
+	b.Config = value
 	return b
 }
 

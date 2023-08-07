@@ -5,10 +5,10 @@ package v1
 import (
 	userv1 "github.com/openshift/api/user/v1"
 	internal "github.com/openshift/client-go/user/applyconfigurations/internal"
-	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	managedfields "k8s.io/apimachinery/pkg/util/managedfields"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 	v1 "k8s.io/client-go/applyconfigurations/meta/v1"
 )
 
@@ -17,10 +17,10 @@ import (
 type IdentityApplyConfiguration struct {
 	v1.TypeMetaApplyConfiguration    `json:",inline"`
 	*v1.ObjectMetaApplyConfiguration `json:"metadata,omitempty"`
-	ProviderName                     *string                 `json:"providerName,omitempty"`
-	ProviderUserName                 *string                 `json:"providerUserName,omitempty"`
-	User                             *corev1.ObjectReference `json:"user,omitempty"`
-	Extra                            map[string]string       `json:"extra,omitempty"`
+	ProviderName                     *string                                   `json:"providerName,omitempty"`
+	ProviderUserName                 *string                                   `json:"providerUserName,omitempty"`
+	User                             *corev1.ObjectReferenceApplyConfiguration `json:"user,omitempty"`
+	Extra                            map[string]string                         `json:"extra,omitempty"`
 }
 
 // Identity constructs an declarative configuration of the Identity type for use with
@@ -245,8 +245,8 @@ func (b *IdentityApplyConfiguration) WithProviderUserName(value string) *Identit
 // WithUser sets the User field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the User field is set to the value of the last call.
-func (b *IdentityApplyConfiguration) WithUser(value corev1.ObjectReference) *IdentityApplyConfiguration {
-	b.User = &value
+func (b *IdentityApplyConfiguration) WithUser(value *corev1.ObjectReferenceApplyConfiguration) *IdentityApplyConfiguration {
+	b.User = value
 	return b
 }
 

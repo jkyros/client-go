@@ -3,19 +3,19 @@
 package v1beta1
 
 import (
-	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	intstr "k8s.io/apimachinery/pkg/util/intstr"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // MachineHealthCheckSpecApplyConfiguration represents an declarative configuration of the MachineHealthCheckSpec type for use
 // with apply.
 type MachineHealthCheckSpecApplyConfiguration struct {
-	Selector            *v1.LabelSelector                      `json:"selector,omitempty"`
-	UnhealthyConditions []UnhealthyConditionApplyConfiguration `json:"unhealthyConditions,omitempty"`
-	MaxUnhealthy        *intstr.IntOrString                    `json:"maxUnhealthy,omitempty"`
-	NodeStartupTimeout  *v1.Duration                           `json:"nodeStartupTimeout,omitempty"`
-	RemediationTemplate *corev1.ObjectReference                `json:"remediationTemplate,omitempty"`
+	Selector            *v1.LabelSelector                         `json:"selector,omitempty"`
+	UnhealthyConditions []UnhealthyConditionApplyConfiguration    `json:"unhealthyConditions,omitempty"`
+	MaxUnhealthy        *intstr.IntOrString                       `json:"maxUnhealthy,omitempty"`
+	NodeStartupTimeout  *v1.Duration                              `json:"nodeStartupTimeout,omitempty"`
+	RemediationTemplate *corev1.ObjectReferenceApplyConfiguration `json:"remediationTemplate,omitempty"`
 }
 
 // MachineHealthCheckSpecApplyConfiguration constructs an declarative configuration of the MachineHealthCheckSpec type for use with
@@ -64,7 +64,7 @@ func (b *MachineHealthCheckSpecApplyConfiguration) WithNodeStartupTimeout(value 
 // WithRemediationTemplate sets the RemediationTemplate field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the RemediationTemplate field is set to the value of the last call.
-func (b *MachineHealthCheckSpecApplyConfiguration) WithRemediationTemplate(value corev1.ObjectReference) *MachineHealthCheckSpecApplyConfiguration {
-	b.RemediationTemplate = &value
+func (b *MachineHealthCheckSpecApplyConfiguration) WithRemediationTemplate(value *corev1.ObjectReferenceApplyConfiguration) *MachineHealthCheckSpecApplyConfiguration {
+	b.RemediationTemplate = value
 	return b
 }

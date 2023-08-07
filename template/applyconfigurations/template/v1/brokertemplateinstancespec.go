@@ -3,15 +3,15 @@
 package v1
 
 import (
-	v1 "k8s.io/api/core/v1"
+	v1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // BrokerTemplateInstanceSpecApplyConfiguration represents an declarative configuration of the BrokerTemplateInstanceSpec type for use
 // with apply.
 type BrokerTemplateInstanceSpecApplyConfiguration struct {
-	TemplateInstance *v1.ObjectReference `json:"templateInstance,omitempty"`
-	Secret           *v1.ObjectReference `json:"secret,omitempty"`
-	BindingIDs       []string            `json:"bindingIDs,omitempty"`
+	TemplateInstance *v1.ObjectReferenceApplyConfiguration `json:"templateInstance,omitempty"`
+	Secret           *v1.ObjectReferenceApplyConfiguration `json:"secret,omitempty"`
+	BindingIDs       []string                              `json:"bindingIDs,omitempty"`
 }
 
 // BrokerTemplateInstanceSpecApplyConfiguration constructs an declarative configuration of the BrokerTemplateInstanceSpec type for use with
@@ -23,16 +23,16 @@ func BrokerTemplateInstanceSpec() *BrokerTemplateInstanceSpecApplyConfiguration 
 // WithTemplateInstance sets the TemplateInstance field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the TemplateInstance field is set to the value of the last call.
-func (b *BrokerTemplateInstanceSpecApplyConfiguration) WithTemplateInstance(value v1.ObjectReference) *BrokerTemplateInstanceSpecApplyConfiguration {
-	b.TemplateInstance = &value
+func (b *BrokerTemplateInstanceSpecApplyConfiguration) WithTemplateInstance(value *v1.ObjectReferenceApplyConfiguration) *BrokerTemplateInstanceSpecApplyConfiguration {
+	b.TemplateInstance = value
 	return b
 }
 
 // WithSecret sets the Secret field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the Secret field is set to the value of the last call.
-func (b *BrokerTemplateInstanceSpecApplyConfiguration) WithSecret(value v1.ObjectReference) *BrokerTemplateInstanceSpecApplyConfiguration {
-	b.Secret = &value
+func (b *BrokerTemplateInstanceSpecApplyConfiguration) WithSecret(value *v1.ObjectReferenceApplyConfiguration) *BrokerTemplateInstanceSpecApplyConfiguration {
+	b.Secret = value
 	return b
 }
 
