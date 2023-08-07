@@ -852,7 +852,7 @@ func (IngressControllerCaptureHTTPHeaders) SwaggerDoc() map[string]string {
 
 var map_IngressControllerHTTPHeader = map[string]string{
 	"":       "IngressControllerHTTPHeader specifies configuration for setting or deleting an HTTP header.",
-	"name":   "name specifies the name of a header on which to perform an action. Its value must be a valid HTTP header name as defined in RFC 2616 section 4.2. The name must consist only of alphanumeric and the following special characters, \"-!#$%&'*+.^_`\". The following header names are reserved and may not be modified via this API: Strict-Transport-Security, Proxy, Host, Cookie, Set-Cookie. It must be no more than 1024 characters in length. Header name must be unique.",
+	"name":   "name specifies the name of a header on which to perform an action. Its value must be a valid HTTP header name as defined in RFC 2616 section 4.2. The name must consist only of alphanumeric and the following special characters, \"-!#$%&'*+.^_`\". The following header names are reserved and may not be modified via this API: Strict-Transport-Security, Proxy, Host, Cookie, Set-Cookie. It must be no more than 255 characters in length. Header name must be unique.",
 	"action": "action specifies actions to perform on headers, such as setting or deleting headers.",
 }
 
@@ -1233,6 +1233,27 @@ var map_KubeStorageVersionMigratorList = map[string]string{
 
 func (KubeStorageVersionMigratorList) SwaggerDoc() map[string]string {
 	return map_KubeStorageVersionMigratorList
+}
+
+var map_MachineConfiguration = map[string]string{
+	"":         "MachineConfiguration provides information to configure an operator to manage Machine Configuration.\n\nCompatibility level 1: Stable within a major release for a minimum of 12 months or 3 minor releases (whichever is longer).",
+	"metadata": "metadata is the standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+	"spec":     "spec is the specification of the desired behavior of the Machine Config Operator",
+	"status":   "status is the most recently observed status of the Machine Config Operator",
+}
+
+func (MachineConfiguration) SwaggerDoc() map[string]string {
+	return map_MachineConfiguration
+}
+
+var map_MachineConfigurationList = map[string]string{
+	"":         "MachineConfigurationList is a collection of items\n\nCompatibility level 1: Stable within a major release for a minimum of 12 months or 3 minor releases (whichever is longer).",
+	"metadata": "metadata is the standard list's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+	"items":    "Items contains the items",
+}
+
+func (MachineConfigurationList) SwaggerDoc() map[string]string {
+	return map_MachineConfigurationList
 }
 
 var map_AdditionalNetworkDefinition = map[string]string{
