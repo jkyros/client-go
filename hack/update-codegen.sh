@@ -49,6 +49,7 @@ function generateApplyConfiguration(){
     ${APPLYCONFIGURATION_GEN}  \
       --output-package "${applyconfigurations_package}" \
       --input-dirs "${applyconfigurationgen_external_apis_csv}" \
+      --external-applyconfigurations k8s.io/api/core/v1.ObjectReference:k8s.io/client-go/applyconfigurations/core/v1 \
       --external-applyconfigurations github.com/openshift/api/operator/v1.OperatorSpec:github.com/openshift/client-go/operator/applyconfigurations/operator/v1 \
       --external-applyconfigurations github.com/openshift/api/operator/v1.OperatorStatus:github.com/openshift/client-go/operator/applyconfigurations/operator/v1 \
       --external-applyconfigurations github.com/openshift/api/operator/v1.OperatorCondition:github.com/openshift/client-go/operator/applyconfigurations/operator/v1 \
@@ -56,7 +57,7 @@ function generateApplyConfiguration(){
       "$@"
 }
 
-for group in apiserver apps authorization build cloudnetwork image imageregistry network oauth project quota route samples security securityinternal template user; do
+for group in apiserver apps authorization build cloudnetwork image imageregistry machineconfiguration network oauth project quota route samples security securityinternal template user; do
   bash ${CODEGEN_PKG}/generate-groups.sh "lister,informer" \
     github.com/openshift/client-go/${group} \
     github.com/openshift/api \
